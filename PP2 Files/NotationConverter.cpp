@@ -51,45 +51,31 @@ void NotationConverter::removeBack(){
 }
 
 std::string NotationConverter::postfixToInfix(std::string inStr){
-
     return inStr;
-
 }
 
 std::string NotationConverter::postfixToPrefix(std::string inStr){
 
     stringstream word;
     word << inStr;
-   
 
     return word.str();
-
-
-
 }
 
 std::string NotationConverter::infixToPostfix(std::string inStr){
-
     return inStr;
-
 }
 
 std::string NotationConverter::infixToPrefix(std::string inStr){
-
     return inStr;
-
 }
 
 std::string NotationConverter::prefixToInfix(std::string inStr){
-
     return inStr;
-
 }
 
 std::string NotationConverter::prefixToPostfix(std::string inStr){
-
     return inStr;
-
 }
 
 

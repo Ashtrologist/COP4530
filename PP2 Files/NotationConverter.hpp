@@ -2,6 +2,7 @@
 #define NOTATIONCONVERTER_H
 
 #include "LinkedList.hpp"
+
 #include "NotationConverterInterface.hpp"
 
 

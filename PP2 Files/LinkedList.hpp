@@ -1,8 +1,6 @@
 #ifndef LINKEDLIST_H   
 #define LINKEDLIST_H
 
-#include "NotationConverter.hpp"
-
 #include <string>
 #include<iostream>
 #include<sstream>
