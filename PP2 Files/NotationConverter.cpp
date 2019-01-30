@@ -1,117 +1,95 @@
 #include "NotationConverter.hpp"
+#include "LinkedList.hpp"
 
-//Constructor for the linkedList
-LinkedList::LinkedList(){
-    header = new Node; //Creates the list sentinenls
-    trailer = new Node;
-    header -> next = trailer; //Sets the sentinenls to point to each other
-    trailer -> prev = header;
+NotationConverter::NotationConverter(){
+    LinkedList();
 }
 
-/*
-Returns if the list is empty. If the header is pointing
-to the trailer, the list must be empty.
-*/
-bool LinkedList::empty () const {
-    return (header -> next == trailer);
-}
 
-//Returns the element at the front of the list
-const Elem& LinkedList::front() const{
-    return header->next->element;
-}
-
-//Returns element at the back of the list
-const Elem& LinkedList::back() const{
-    return trailer->prev->element;
-}
-
-//The logic for inserting a node
-void LinkedList::add(Node *v, const Elem& e){
-    Node* u = new Node;
-    u -> element = e;
-    u -> next = v;
-    u -> prev = v -> prev;
-    v -> prev -> next = v -> prev = u;
-}
-
-//Adds an element to the end of the linkedlist. 
-//Just calls the above function. Will be used within the new operation function.
-void LinkedList::addBack(const Elem& e){
-    add(trailer, e);
-}
-
-void LinkedList::addFront(const Elem& e){
-    add(header, e);
-}
-
-//The logic for deleting a node
-void LinkedList::remove(Node* v){
-    Node* u = v->prev;
-    Node* w = v->next;
-    u->next = w;
-    w->prev = u;
-    delete v;
-}
-
-//Removes the first element of the linkedlist
-//Calls the remove function
-void LinkedList::removeFront(){
-    remove(header->next);
-}
-
-//Removes the last element of the linkedlist
-//Calls the function above
-void LinkedList::removeBack(){
-    remove(trailer -> prev);
-}
-
-LinkedList::~LinkedList(){
-    while(!empty()) {
-        removeFront(); //Removes the nodes except the sentinenls
-    }
-    delete header; //Removes the sentinenls
-    delete trailer;
-}
-
+//Inserts element to the front of the deque
 void NotationConverter::insertFront(const Elem& e){
     element.addFront(e);
     num ++;
 }
 
+//Inserts element to the end of the deque
 void NotationConverter::insertBack(const Elem& e){
     element.addBack(e);
     num ++;
 }
 
+//Returns if deque is empty
 bool NotationConverter::empty() const{
     return element.empty();
 }
 
+//Returns the size of the deque
 int NotationConverter::size() const{
     return num;
 }
 
-void NotationConverter::removeFront() throw(DequeEmpty){
-    if(empty()){
+//Removes element from the front of the deque
+void NotationConverter::removeFront(){
+    if(empty())
         throw ("DequeEmpty");
-    }
-
+    
     else{
         element.removeFront();
         num --;
     }
-
 }
 
-void NotationConverter::removeBack() throw(DequeEmpty){
-    if(empty()){
+//Removes element from the back of the deque
+void NotationConverter::removeBack(){
+    if(empty())
         throw("DequemEmpty");
-    }
-
-    else{
+    
+    else {
         element.removeBack();
         num --;
     }
 }
+
+std::string NotationConverter::postfixToInfix(std::string inStr){
+
+    return inStr;
+
+}
+
+std::string NotationConverter::postfixToPrefix(std::string inStr){
+
+    stringstream word;
+    word << inStr;
+   
+
+    return word.str();
+
+
+
+}
+
+std::string NotationConverter::infixToPostfix(std::string inStr){
+
+    return inStr;
+
+}
+
+std::string NotationConverter::infixToPrefix(std::string inStr){
+
+    return inStr;
+
+}
+
+std::string NotationConverter::prefixToInfix(std::string inStr){
+
+    return inStr;
+
+}
+
+std::string NotationConverter::prefixToPostfix(std::string inStr){
+
+    return inStr;
+
+}
+
 
