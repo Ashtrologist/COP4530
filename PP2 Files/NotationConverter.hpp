@@ -26,6 +26,7 @@ class LinkedList {
         bool empty() const; //Checks if the list is empty;
         const Elem& front() const; //Gets the element at the front of the list
         const Elem& back() const; //Gets the element at the back of the list
+        void addFront(const Elem& e);
         void addBack (const Elem& e); //Adds an element to the end of the linked list
         void removeFront(); //Removes an element from the front of the linked list
         void removeBack(); //Removes an element from the end of the linked list
@@ -50,13 +51,7 @@ public:
     void insertBack(const Elem& e);
     void removeFront() throw(DequeEmpty);
     void removeBack() throw(DequeEmpty);
-
-private:
-    LinkedList D;
-    int n;
-
-
-
+    
 //Functions to be implemented. They are inhereted from base class
    std::string postfixToInfix(std::string inStr);
    std::string postfixToPrefix(std::string inStr);
@@ -65,6 +60,9 @@ private:
    std::string prefixToInfix(std::string inStr);
    std::string prefixToPostfix(std::string inStr);
 
+private:
+    LinkedList element;
+    int num = 0;
 };
 
 
