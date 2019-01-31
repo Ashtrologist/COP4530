@@ -5,7 +5,6 @@ NotationConverter::NotationConverter(){
     LinkedList();
 }
 
-
 //Inserts element to the front of the deque
 void NotationConverter::insertFront(const Elem& e){
     element.addFront(e);
@@ -54,7 +53,6 @@ std::string NotationConverter::postfixToInfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
     string temp = " ";
 
-    
     if(regex_match(inStr, self_regex) == false){
         throw("Invalid String");
     }
