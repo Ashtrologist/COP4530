@@ -71,51 +71,48 @@ bool NotationConverter::isOperator(char ex){
 }
 
 
-
-
-
-
 std::string NotationConverter::postfixToInfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
-    string currentChar = " ";
-    string character1 = " ";
-    string character2 = " ";
-    string returnString = " ";
+    string currentChar = "";
+    string character1 = "";
+    string character2 = "";
+    string returnString = "";
 
 //Regex to ensure input validation
     if(regex_match(inStr, self_regex) == false){
         throw("Invalid String");
     }
 
+
     for (char i = 0; i < inStr.length(); i++){
+
+//If the current character is an arithmetic operator
         if(isOperator(i)){
             currentChar += i;
-            element.addBack(currentChar);
-            currentChar = " ";
+            character1 = back();
+            removeBack();
+            character2 = back();
+            removeBack();
+            insertBack(currentChar);
+            insertBack(character1);
+            insertBack(character2);
+            currentChar = "";
+            character1 = "";
+            character2 = "";
         }
-        //Add the current character to a string
-        //Add top character to a string and then pop
-        //Add top character to a string and then pop
-        //Readd all three back to the string in order of poppage
+
+//Otherwise just add the character to the deque
         else {
             currentChar += i;
-            character1 = element.back();
-            element.removeBack();
-            character2 = element.back();
-            element.removeBack();
-            element.addBack(currentChar);
-            element.addBack(character1);
-            element.addBack(character2);
-            currentChar = " ";
-            character1 = " ";
-            character2 = " ";
+            insertBack(currentChar);
+            currentChar = "";
         }
 
     }
 
             while(!element.empty()){
-            returnString += element.back();
-            element.removeBack();
+            returnString += back();
+            removeBack();
         } 
 
         return returnString;
@@ -127,27 +124,78 @@ std::string NotationConverter::postfixToInfix(std::string inStr){
 
 
 std::string NotationConverter::postfixToPrefix(std::string inStr){
+    std::regex self_regex("[a-zA-Z +-/*()]+");
+    string currentChar = "";
+    string character1 = "";
+    string character2 = "";
+    string returnString = "";
 
-    stringstream word;
-    word << inStr;
+//Regex to ensure input validation
+    if(regex_match(inStr, self_regex) == false){
+        throw("Invalid String");
+    }
+    return inStr;
 
-    return word.str();
 }
 
 std::string NotationConverter::infixToPostfix(std::string inStr){
+    std::regex self_regex("[a-zA-Z +-/*()]+");
+    string currentChar = "";
+    string character1 = "";
+    string character2 = "";
+    string returnString = "";
+
+//Regex to ensure input validation
+    if(regex_match(inStr, self_regex) == false){
+        throw("Invalid String");
+    }
+
     return inStr;
 }
 
 std::string NotationConverter::infixToPrefix(std::string inStr){
+    std::regex self_regex("[a-zA-Z +-/*()]+");
+    string currentChar = "";
+    string character1 = "";
+    string character2 = "";
+    string returnString = "";
+
+//Regex to ensure input validation
+    if(regex_match(inStr, self_regex) == false){
+        throw("Invalid String");
+    }
     return inStr;
 }
 
 std::string NotationConverter::prefixToInfix(std::string inStr){
+    std::regex self_regex("[a-zA-Z +-/*()]+");
+    string currentChar = "";
+    string character1 = "";
+    string character2 = "";
+    string returnString = "";
+
+//Regex to ensure input validation
+    if(regex_match(inStr, self_regex) == false){
+        throw("Invalid String");
+    }
     return inStr;
+
 }
 
 std::string NotationConverter::prefixToPostfix(std::string inStr){
+    std::regex self_regex("[a-zA-Z +-/*()]+");
+    string currentChar = "";
+    string character1 = "";
+    string character2 = "";
+    string returnString = "";
+
+//Regex to ensure input validation
+    if(regex_match(inStr, self_regex) == false){
+        throw("Invalid String");
+    }
     return inStr;
 }
+    
+
 
 
