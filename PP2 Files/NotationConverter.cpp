@@ -49,13 +49,30 @@ void NotationConverter::removeBack(){
     }
 }
 
+
+
 std::string NotationConverter::postfixToInfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
+    string character = " ";
     string temp = " ";
 
+//Regex to ensure input validation
     if(regex_match(inStr, self_regex) == false){
         throw("Invalid String");
     }
+
+    for (char i = 0; i < inStr.length(); i++){
+        if(i == '+'|| i == '*' || i == '/' || i == '-'){
+            character += i;
+            element.addBack(character);
+            character = " ";
+        }
+
+        else 
+            temp += i;
+
+    }
+
 
     // for (char i = 0; i < inStr.length(); i ++){
     //     if(i == '+'|| i == '*' || i == '/' || i == '-'){

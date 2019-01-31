@@ -23,6 +23,8 @@ public:
     void insertBack(const Elem& e);     //Insert element to the end of the deque
     void removeFront();                 //Removes element front the front of the deuque
     void removeBack();                  //Removes element from the back of the deuque
+    bool isOperator();                  //Helper function 
+    bool isOperand();                   //Helper function
 
 //Functions to be implemented. They are inhereted from base class
    std::string postfixToInfix(std::string inStr);
