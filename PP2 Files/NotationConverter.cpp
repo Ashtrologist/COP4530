@@ -49,7 +49,17 @@ void NotationConverter::removeBack(){
     }
 }
 
-
+//Helper function to test if it's an operand
+bool NotationConverter::isOperator(char ex){
+    switch(ex){
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            return true;
+    }
+    return false;
+}
 
 std::string NotationConverter::postfixToInfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
@@ -62,7 +72,7 @@ std::string NotationConverter::postfixToInfix(std::string inStr){
     }
 
     for (char i = 0; i < inStr.length(); i++){
-        if(i == '+'|| i == '*' || i == '/' || i == '-'){
+        if(isOperator(i)){
             character += i;
             element.addBack(character);
             character = " ";
