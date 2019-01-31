@@ -1,14 +1,12 @@
 #ifndef NOTATIONCONVERTER_H
 #define NOTATIONCONVERTER_H
 
-#include "LinkedList.hpp"
-
-#include "NotationConverterInterface.hpp"
-
-
 #include <string>
-#include<iostream>
-#include<sstream>
+#include <iostream>
+#include <sstream>
+#include <regex>
+#include "LinkedList.hpp"
+#include "NotationConverterInterface.hpp"
 
 using namespace std;
 
@@ -16,15 +14,15 @@ typedef string Elem;
 
 class NotationConverter : public NotationConverterInterface {
 public:
-    NotationConverter();
+    NotationConverter();                //Constructor
     int size() const;
-    bool empty() const;
-    const Elem& front() const;
-    const Elem& back() const;
-    void insertFront(const Elem& e);
-    void insertBack(const Elem& e);
-    void removeFront();
-    void removeBack();
+    bool empty() const;                 //Determines if Deque is empty
+    const Elem& front() const;          //Returns the first element
+    const Elem& back() const;           //Returns the last element
+    void insertFront(const Elem& e);    //Insert element to the front of the deque
+    void insertBack(const Elem& e);     //Insert element to the end of the deque
+    void removeFront();                 //Removes element front the front of the deuque
+    void removeBack();                  //Removes element from the back of the deuque
 
 //Functions to be implemented. They are inhereted from base class
    std::string postfixToInfix(std::string inStr);

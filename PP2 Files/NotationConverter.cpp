@@ -51,7 +51,29 @@ void NotationConverter::removeBack(){
 }
 
 std::string NotationConverter::postfixToInfix(std::string inStr){
-    return inStr;
+    std::regex self_regex("[a-zA-Z +-/*()]+");
+    string temp = " ";
+
+    
+    if(regex_match(inStr, self_regex) == false){
+        throw("Invalid String");
+    }
+
+    // for (char i = 0; i < inStr.length(); i ++){
+    //     if(i == '+'|| i == '*' || i == '/' || i == '-'){
+    //         element.addBack(i);
+    //     }
+
+    //     else{
+    //         temp.append(i);
+    //         element.removeBack();
+
+
+    //     }
+    // }
+
+    else
+        return inStr;
 }
 
 std::string NotationConverter::postfixToPrefix(std::string inStr){
