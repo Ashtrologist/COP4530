@@ -50,7 +50,7 @@ void NotationConverter::removeFront(){
 //Removes element from the back of the deque
 void NotationConverter::removeBack(){
     if(empty())
-        throw("DequemEmpty");
+        throw("DequeEmpty");
     
     else {
         element.removeBack();
@@ -70,12 +70,12 @@ bool NotationConverter::isOperator(char ex){
     return false;
 }
 
-
+//We want to skip spaces!
 std::string NotationConverter::postfixToInfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
-    string currentChar = "";
-    string character1 = "";
-    string character2 = "";
+    char currentChar = 0;
+    char character1 = 0;
+    char character2 = 0;
     string returnString = "";
 
 //Regex to ensure input validation
@@ -83,12 +83,12 @@ std::string NotationConverter::postfixToInfix(std::string inStr){
         throw("Invalid String");
     }
 
-
-    for (char i = 0; i < inStr.length(); i++){
-
+ 
+    for (int i = 0; i < inStr.length(); i++){
+    
 //If the current character is an arithmetic operator
-        if(isOperator(i)){
-            currentChar += i;
+        if(isOperator(inStr[i])){
+            currentChar = inStr[i];
             character1 = back();
             removeBack();
             character2 = back();
@@ -96,32 +96,26 @@ std::string NotationConverter::postfixToInfix(std::string inStr){
             insertBack(currentChar);
             insertBack(character1);
             insertBack(character2);
-            currentChar = "";
-            character1 = "";
-            character2 = "";
+            currentChar = 0;
+            character1 = 0;
+            character2 = 0;
         }
 
 //Otherwise just add the character to the deque
         else {
-            currentChar += i;
+            currentChar = inStr[i];
             insertBack(currentChar);
-            currentChar = "";
+            currentChar = 0;
         }
-
     }
-
-            while(!element.empty()){
-            returnString += back();
-            removeBack();
+ 
+            while(!empty()){
+            returnString += front();
+            removeFront();
         } 
 
         return returnString;
 }
-
-
-
-
-
 
 std::string NotationConverter::postfixToPrefix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
@@ -184,16 +178,58 @@ std::string NotationConverter::prefixToInfix(std::string inStr){
 
 std::string NotationConverter::prefixToPostfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
-    string currentChar = "";
-    string character1 = "";
-    string character2 = "";
+    char temp1 = 0;
+    char temp2 = 0;
+    string newString = "";
     string returnString = "";
+
 
 //Regex to ensure input validation
     if(regex_match(inStr, self_regex) == false){
         throw("Invalid String");
     }
-    return inStr;
+
+     reverse(inStr.begin(), inStr.end());
+     newString.assign(inStr);
+
+     cout << newString;
+
+
+    for (int i = 0; i < inStr.length(); i++){
+       //Checks if character is a letter 
+        if(isalpha(inStr[i])){
+            insertBack(inStr[i]);
+
+        }
+    //Checks if character is an operator
+        else if(isOperator(inStr[i])){
+            temp1 = back();
+            removeBack();
+            temp2 = back();
+            removeBack();
+            insertBack(inStr[i]);
+            insertBack(temp1);
+            insertBack(temp2);
+            temp1 = 0;
+            temp2 = 0;
+
+        }
+    //If character is a space
+        else
+            continue;
+        
+    }
+
+    while(!empty()){
+        temp1 = front();
+        temp2 = back();
+        returnString += front();
+        removeFront();
+    }
+
+    return returnString;
+
+
 }
     
 

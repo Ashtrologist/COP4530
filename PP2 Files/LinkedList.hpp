@@ -7,13 +7,13 @@
 
 using namespace std;
 
-typedef string Elem;
+typedef char Elem;
 class Node {
     friend class NotationConverter;
     friend class LinkedList;
 
     private:
-        string element;
+        Elem element;
         Node* prev;
         Node* next;
 };

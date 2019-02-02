@@ -1,16 +1,18 @@
 #ifndef NOTATIONCONVERTER_H
 #define NOTATIONCONVERTER_H
 
-#include <string>
 #include <iostream>
+#include <string>
 #include <sstream>
 #include <regex>
+#include<ctype.h>
+#include<algorithm>
 #include "LinkedList.hpp"
 #include "NotationConverterInterface.hpp"
 
 using namespace std;
 
-typedef string Elem;
+typedef char Elem;
 
 class NotationConverter : public NotationConverterInterface {
 public:
