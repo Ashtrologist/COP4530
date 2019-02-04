@@ -178,7 +178,7 @@ std::string NotationConverter::prefixToInfix(std::string inStr){
 
 std::string NotationConverter::prefixToPostfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
-
+//Input validation
      if(regex_match(inStr, self_regex) == false){
         throw("Invalid String");
     }
@@ -186,17 +186,13 @@ std::string NotationConverter::prefixToPostfix(std::string inStr){
     char temp1 = 0;
     char temp2 = 0;
     char test = 0;
-    string newString = "";
+  
     string returnString = "";
 
-
-//Regex to ensure input validation
+//Reverse the input string
      reverse(inStr.begin(), inStr.end());
-     newString.assign(inStr);
 
-     cout << newString;
-
-
+//We want to loop through the string character for character
     for (int i = 0; i < inStr.length(); i++){
        //Checks if character is a letter 
         if(isalpha(inStr[i])){
@@ -223,12 +219,15 @@ std::string NotationConverter::prefixToPostfix(std::string inStr){
         
     }
 
+//While the deque is not empty we want to add each character in the deque to a string
     while(!empty()){
         temp1 = front();
         temp2 = back();
         returnString += front();
         removeFront();
     }
+
+//Calls a function to insert spaces into the string between each character  
 
     return returnString;
 
