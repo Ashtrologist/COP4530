@@ -39,7 +39,7 @@ int NotationConverter::size() const{
 //Removes element from the front of the deque
 void NotationConverter::removeFront(){
     if(empty())
-        throw ("DequeEmpty");
+        throw ("Cannot remove element from the front");
     
     else{
         element.removeFront();
@@ -50,7 +50,7 @@ void NotationConverter::removeFront(){
 //Removes element from the back of the deque
 void NotationConverter::removeBack(){
     if(empty())
-        throw("DequeEmpty");
+        throw("Cannot remove element from the back");
     
     else {
         element.removeBack();
@@ -178,17 +178,19 @@ std::string NotationConverter::prefixToInfix(std::string inStr){
 
 std::string NotationConverter::prefixToPostfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
+
+     if(regex_match(inStr, self_regex) == false){
+        throw("Invalid String");
+    }
+
     char temp1 = 0;
     char temp2 = 0;
+    char test = 0;
     string newString = "";
     string returnString = "";
 
 
 //Regex to ensure input validation
-    if(regex_match(inStr, self_regex) == false){
-        throw("Invalid String");
-    }
-
      reverse(inStr.begin(), inStr.end());
      newString.assign(inStr);
 
@@ -199,6 +201,7 @@ std::string NotationConverter::prefixToPostfix(std::string inStr){
        //Checks if character is a letter 
         if(isalpha(inStr[i])){
             insertBack(inStr[i]);
+             test = back();
 
         }
     //Checks if character is an operator
