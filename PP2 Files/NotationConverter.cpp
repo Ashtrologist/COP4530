@@ -41,21 +41,17 @@ void NotationConverter::removeFront(){
     if(empty())
         throw ("Cannot remove element from the front");
     
-    else{
-        element.removeFront();
-        num --;
-    }
+    element.removeFront();
+    num --;
 }
 
 //Removes element from the back of the deque
 void NotationConverter::removeBack(){
     if(empty())
         throw("Cannot remove element from the back");
-    
-    else {
-        element.removeBack();
-        num --;
-    }
+
+    element.removeBack();
+    num --;
 }
 
 //Helper function to test if it's an operand
@@ -198,8 +194,8 @@ std::string NotationConverter::prefixToPostfix(std::string inStr){
         if(isalpha(inStr[i])){
             insertBack(inStr[i]);
              test = back();
-
         }
+
     //Checks if character is an operator
         else if(isOperator(inStr[i])){
             temp1 = back();
@@ -218,11 +214,9 @@ std::string NotationConverter::prefixToPostfix(std::string inStr){
             continue;
         
     }
-
+ 
 //While the deque is not empty we want to add each character in the deque to a string
     while(!empty()){
-        temp1 = front();
-        temp2 = back();
         returnString += front();
         removeFront();
     }

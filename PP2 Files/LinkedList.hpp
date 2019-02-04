@@ -9,7 +9,6 @@ using namespace std;
 
 typedef char Elem;
 class Node {
-    friend class NotationConverter;
     friend class LinkedList;
 
     private:
@@ -31,6 +30,8 @@ class LinkedList {
         void addBack (const Elem& e); //Adds an element to the end of the linked list
         void removeFront(); //Removes an element from the front of the linked list
         void removeBack(); //Removes an element from the end of the linked list
+        
+    protected:
         void add(Node* v, const Elem& e); //Function to add an element
         void remove(Node* v);       //Function to remove an element
 
