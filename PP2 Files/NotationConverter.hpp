@@ -7,8 +7,8 @@
 #include <regex>
 #include<ctype.h>
 #include<algorithm>
-#include "LinkedList.hpp"
 #include "NotationConverterInterface.hpp"
+#include"Deque.hpp"
 
 using namespace std;
 
@@ -17,14 +17,7 @@ typedef char Elem;
 class NotationConverter : public NotationConverterInterface {
 public:
     NotationConverter();                //Constructor
-    int size() const;
-    bool empty() const;                 //Determines if Deque is empty
-    const Elem& front() const;          //Returns the first element
-    const Elem& back() const;           //Returns the last element
-    void insertFront(const Elem& e);    //Insert element to the front of the deque
-    void insertBack(const Elem& e);     //Insert element to the end of the deque
-    void removeFront();                 //Removes element front the front of the deuque
-    void removeBack();                  //Removes element from the back of the deuque
+
     bool isOperator(char ex);           //Helper function to 
     bool isOperand(char ex);            //Helper function
 
@@ -37,8 +30,8 @@ public:
    std::string prefixToPostfix(std::string inStr);
 
 private:
-    LinkedList element;
     int num = 0;
+    Deque element;
 };
 
 
