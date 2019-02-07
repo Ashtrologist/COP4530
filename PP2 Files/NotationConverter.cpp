@@ -1,7 +1,7 @@
 #include "NotationConverter.hpp"
 #include "Deque.hpp"
 
-
+//Constructor which calls the deque class
 NotationConverter::NotationConverter(){
     Deque();
     
@@ -19,6 +19,7 @@ bool NotationConverter::isOperator(char ex){
     return false;
 }
 
+//Helper function for calculating pemdas
 int NotationConverter::precedence(char ex){
     switch (ex){
         case '*':
@@ -74,14 +75,11 @@ std::string NotationConverter::prefixToInfix(std::string inStr){
             temp2 += ')';
             element.insertBack(temp2);
         }
-//If its a space
+//If its a space skip it
         else if (i == ' ')
             continue;
-
     }
-
     return temp2;
-
 }
 
 //We want to skip spaces!
@@ -118,10 +116,9 @@ std::string NotationConverter::postfixToInfix(std::string inStr){
             temp2 += '(';
             element.insertBack(temp2);
         }
-//If its a space
+//If its a space skip it
         else if (i == ' ')
             continue;
-
     }
 
     reverse(temp2.begin(), temp2.end());
@@ -134,7 +131,6 @@ std::string NotationConverter::postfixToPrefix(std::string inStr){
     string temp = "";
     string returnString = "";
 
-
 //Regex to ensure input validation
     if(regex_match(inStr, self_regex) == false){
         throw("Invalid String");
@@ -144,7 +140,6 @@ std::string NotationConverter::postfixToPrefix(std::string inStr){
     returnString = infixToPrefix(temp);
 
     return returnString;
-
 }
 
 std::string NotationConverter::infixToPostfix(std::string inStr){
@@ -163,7 +158,6 @@ std::string NotationConverter::infixToPostfix(std::string inStr){
     for (auto i : inStr){
         if(i == ' '){
             continue;
-
         }
 //Push it to the stack
         else if (i == '('){
@@ -215,7 +209,6 @@ std::string NotationConverter::infixToPostfix(std::string inStr){
         returnString += ' ';
     }
     
-
     return returnString;
 }
 
