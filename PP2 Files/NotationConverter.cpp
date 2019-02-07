@@ -88,7 +88,7 @@ std::string NotationConverter::postfixToInfix(std::string inStr){
 //If its an operator do this
         else if (isOperator(i)){
             temp2 = "";
-            temp2 += '(';
+            temp2 += ')';
             temp2 += element.back();
             element.removeBack();
             temp2 += ' ';
@@ -96,7 +96,7 @@ std::string NotationConverter::postfixToInfix(std::string inStr){
             temp2 += ' ';
             temp2 += element.back();
             element.removeBack();
-            temp2 += ')';
+            temp2 += '(';
             element.insertBack(temp2);
         }
 //If its a space
@@ -104,6 +104,9 @@ std::string NotationConverter::postfixToInfix(std::string inStr){
             continue;
 
     }
+
+    reverse(temp2.begin(), temp2.end());
+    
     return temp2;
 }
 
