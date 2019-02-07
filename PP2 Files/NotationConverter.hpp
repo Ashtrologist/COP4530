@@ -19,7 +19,8 @@ public:
     NotationConverter();                //Constructor
 
     bool isOperator(char ex);           //Helper function to 
-    bool isOperand(char ex);            //Helper function
+    bool isOperand(char ex);            //Helper function 
+    int precedence(char ex);            //Helper function
 
 //Functions to be implemented. They are inhereted from base class
    std::string postfixToInfix(std::string inStr);

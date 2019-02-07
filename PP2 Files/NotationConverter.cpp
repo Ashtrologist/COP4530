@@ -19,6 +19,25 @@ bool NotationConverter::isOperator(char ex){
     return false;
 }
 
+int NotationConverter::precedence(char ex){
+    switch (ex){
+        case '*':
+            return 2;
+            break;
+        case '/':
+            return 2;
+            break;
+        case '+':
+            return 1;
+            break;
+        case '-':
+            return 1;
+            break;
+        default:
+            return -1;
+    }
+}
+
 std::string NotationConverter::prefixToInfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
     string temp1 = "";
@@ -106,7 +125,7 @@ std::string NotationConverter::postfixToInfix(std::string inStr){
     }
 
     reverse(temp2.begin(), temp2.end());
-    
+
     return temp2;
 }
 
@@ -157,6 +176,10 @@ std::string NotationConverter::postfixToPrefix(std::string inStr){
 
 std::string NotationConverter::infixToPostfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");  
+    element.insertBack("flag");
+
+    string temp1 = "";
+    string temp2 = "";
     string returnString = "";
 
 //Regex to ensure input validation
@@ -164,22 +187,63 @@ std::string NotationConverter::infixToPostfix(std::string inStr){
         throw("Invalid String");
     }
 
-    // for(int i = 0; i < inStr.length(); i ++){
-    //     if(inStr[i] == '('){
-    //         element.insertFront(inStr[i]);
-    //     }
+    for (auto i : inStr){
+        if(i == ' '){
+            continue;
 
-    //     if(isalpha(inStr[i])){
-    //         returnString += inStr[i];
-    //         returnString += ' ';
-    //     }
+        }
+//Push it to the stack
+        else if (i == '('){
+            temp1 += i;
+            element.insertFront(temp1);
+            temp1 = "";
+        }
 
-    //   //  if(isOperator(inStr[i]))
+        else if(i == ')'){
+            while(element.front() != "flag" && element.front() != "("){
+                temp1 = element.front();
+                element.removeFront();
+                returnString += temp1;
+                returnString += ' ';
+                temp1 = "";
+            }
 
-    // }
+            if(element.front() == "("){
+                element.removeFront();
+            }
+
+        }
+
+        else if(isalpha(i)){
+            returnString += i;
+            returnString += ' ';
+        }
+
+        else if(isOperator(i)) {
+
+            while(element.front() != "flag" && precedence(i) <= precedence(element.front().at(0))){
+                temp1 = "";
+                temp1 = element.front();
+                element.removeFront();
+                returnString += temp1;
+                returnString += ' ';
+            }
+            temp2 += i;
+            element.insertFront(temp2);
+            temp2 = "";
+        }
+    }
+
+    while(element.front() != "flag"){
+        temp1 = "";
+        temp1 = element.front();
+        element.removeFront();
+        returnString += temp1;
+        returnString += ' ';
+    }
     
 
-    return inStr;
+    return returnString;
 }
 
 std::string NotationConverter::infixToPrefix(std::string inStr){
