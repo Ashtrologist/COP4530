@@ -19,7 +19,6 @@ void Deque::insertBack(const Elem& e){
     if(header == NULL) { 
         current->element = e;
         header = current;
-      //  tail = NULL;//tail and node can not point to the same node in this implementation
         header->prev = NULL;
         header->next = tail;
     } 

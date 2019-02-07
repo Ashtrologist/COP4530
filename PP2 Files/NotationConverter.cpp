@@ -237,9 +237,7 @@ std::string NotationConverter::infixToPrefix(std::string inStr){
     }
 
     reverse(temp.begin(), temp.end());
-
     returnString = infixToPostfix(temp);
-
     reverse(returnString.begin(), returnString.end());
 
     return returnString;
@@ -257,10 +255,7 @@ std::string NotationConverter::prefixToPostfix(std::string inStr){
      temp = prefixToInfix(inStr);
      returnString = infixToPostfix(temp);
 
-
     return returnString;
-
-
 }
 
 

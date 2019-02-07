@@ -8,9 +8,9 @@
 #include<cstring>
 #include<ctype.h>
 #include<algorithm>
+
 #include "NotationConverterInterface.hpp"
 #include"Deque.hpp"
-
 using namespace std;
 
 typedef string Elem;
