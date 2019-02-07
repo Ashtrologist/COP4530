@@ -5,7 +5,7 @@
 using namespace std;
 
 
-typedef char Elem;
+typedef string Elem;
 
 class Node {
     friend class Deque;

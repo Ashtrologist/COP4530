@@ -12,7 +12,7 @@
 
 using namespace std;
 
-typedef char Elem;
+typedef string Elem;
 
 class NotationConverter : public NotationConverterInterface {
 public:
