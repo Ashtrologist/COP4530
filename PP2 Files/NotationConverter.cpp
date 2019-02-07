@@ -21,7 +21,6 @@ bool NotationConverter::isOperator(char ex){
 
 std::string NotationConverter::prefixToInfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
-    string returnString;
     string temp1 = "";
     string temp2 = "";
 
@@ -30,37 +29,39 @@ std::string NotationConverter::prefixToInfix(std::string inStr){
         throw("Invalid String");
     }
 
+//Reverse the String
     reverse(inStr.begin(), inStr.end());
 
+//Loop through the string
     for(auto i : inStr){
+
+//If its a character push it to the stack
         if(isalpha(i)){
             temp1 = "";
             temp1 += i;
             element.insertBack(temp1);
         }
-
+//If its an operator do this
         else if (isOperator(i)){
             temp2 = "";
             temp2 += '(';
             temp2 += element.back();
             element.removeBack();
+            temp2 += ' ';
             temp2 += i;
+            temp2 += ' ';
             temp2 += element.back();
+            element.removeBack();
             temp2 += ')';
             element.insertBack(temp2);
         }
-
+//If its a space
         else if (i == ' ')
             continue;
 
     }
 
-    while(!element.empty()){
-        returnString += element.back();
-        element.removeBack();
-    }
-
-    return returnString;
+    return temp2;
 
 }
 
