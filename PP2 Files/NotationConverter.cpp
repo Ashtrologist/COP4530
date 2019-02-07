@@ -249,12 +249,34 @@ std::string NotationConverter::infixToPostfix(std::string inStr){
 std::string NotationConverter::infixToPrefix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
     string returnString = "";
+    string temp = "";
+
 
 //Regex to ensure input validation
     if(regex_match(inStr, self_regex) == false){
         throw("Invalid String");
     }
-    return inStr;
+
+    for (auto i : inStr){
+        temp += i;
+    }
+
+    for (int i = 0; i < temp.length(); i ++){
+        if (temp[i] == '('){
+            temp[i] = ')';
+        }
+        else if (temp[i] == ')'){
+            temp[i] = '(';
+        }
+    }
+
+    reverse(temp.begin(), temp.end());
+
+    returnString = infixToPostfix(temp);
+
+    reverse(returnString.begin(), returnString.end());
+
+    return returnString;
 }
 
 std::string NotationConverter::prefixToPostfix(std::string inStr){

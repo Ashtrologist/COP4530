@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <regex>
+#include<cstring>
 #include<ctype.h>
 #include<algorithm>
 #include "NotationConverterInterface.hpp"
