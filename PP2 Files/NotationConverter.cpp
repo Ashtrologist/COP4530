@@ -69,43 +69,42 @@ std::string NotationConverter::prefixToInfix(std::string inStr){
 std::string NotationConverter::postfixToInfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
     string returnString = "";
-    // char temp1 = 0;
-    // char temp2 = 0;
+     string temp1 = "";
+     string temp2 = "";
 
 //Regex to ensure input validation
     if(regex_match(inStr, self_regex) == false){
         throw("Invalid String");
     }
-    // for (int i = 0; i < inStr.length(); i++){
-    //     if(isalpha(inStr[i])){
-    //         element.insertBack(inStr[i]);
-    //     }
 
-    //     else if(isOperator(inStr[i])){
-    //         temp1 = element.front();
-    //         element.removeFront();
-    //         temp2 = element.front();
-    //         element.removeFront();
-    //         element.insertBack('(');
-    //         element.insertBack(temp1);
-    //         element.insertBack(inStr[i]);
-    //         element.insertBack(temp2);
-    //         element.insertBack(')');
-    //         temp1 = 0;
-    //         temp2 = 0;
-    //     }
+    for(auto i : inStr){
 
-    //     else
-    //         continue;
-        
-    // }
+//If its a character push it to the stack
+        if(isalpha(i)){
+            temp1 = "";
+            temp1 += i;
+            element.insertBack(temp1);
+        }
+//If its an operator do this
+        else if (isOperator(i)){
+            temp2 = "";
+            temp2 += '(';
+            temp2 += element.back();
+            element.removeBack();
+            temp2 += ' ';
+            temp2 += i;
+            temp2 += ' ';
+            temp2 += element.back();
+            element.removeBack();
+            temp2 += ')';
+            element.insertBack(temp2);
+        }
+//If its a space
+        else if (i == ' ')
+            continue;
 
-    //     while(!element.empty()){
-    //         returnString += element.front();
-    //         element.removeFront();
-    //      }
-
-        return returnString;
+    }
+    return temp2;
 }
 
 std::string NotationConverter::postfixToPrefix(std::string inStr){
