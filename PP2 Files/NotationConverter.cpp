@@ -131,8 +131,7 @@ std::string NotationConverter::postfixToInfix(std::string inStr){
 
 std::string NotationConverter::postfixToPrefix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
-    // char temp1 = 0;
-    // char temp2 = 0;
+    string temp = "";
     string returnString = "";
 
 
@@ -141,35 +140,9 @@ std::string NotationConverter::postfixToPrefix(std::string inStr){
         throw("Invalid String");
     }
 
-//     for(int i = 0; i < inStr.length(); i++){
-//         if(isalpha(inStr[i])){
-//             element.insertBack(inStr[i]);
-//         }
+    temp = postfixToInfix(inStr);
+    returnString = infixToPrefix(temp);
 
-//         else if(isOperator(inStr[i])){
-//             temp1 = element.front();
-//             element.removeFront();
-//             temp2 = element.front();
-//             element.insertBack(temp1);
-//             element.insertBack(inStr[i]);
-//             element.insertBack(temp2);
-//             temp1 = 0;
-//             temp2 = 0;
-//         }
-
-//         else
-//             continue;
-        
-//     }
-
-//     while(!element.empty()){
-//         returnString += element.front();
-//         returnString += ' ';
-//         element.removeFront();
-
-
-//     }
-    
     return returnString;
 
 }
@@ -281,54 +254,16 @@ std::string NotationConverter::infixToPrefix(std::string inStr){
 
 std::string NotationConverter::prefixToPostfix(std::string inStr){
     std::regex self_regex("[a-zA-Z +-/*()]+");
+    string temp = "";
+    string returnString = "";
 //Input validation
      if(regex_match(inStr, self_regex) == false){
         throw("Invalid String");
     }
 
-//     char temp1 = 0;
-//     char temp2 = 0;
-//     char test = 0;
-  
-    string returnString = "";
+     temp = prefixToInfix(inStr);
+     returnString = infixToPostfix(temp);
 
-// //Reverse the input string
-//      reverse(inStr.begin(), inStr.end());
-
-// //We want to loop through the string character for character
-//     for (int i = 0; i < inStr.length(); i++){
-//        //Checks if character is a letter 
-//         if(isalpha(inStr[i])){
-//             element.insertBack(inStr[i]);
-//              test = element.back();
-//         }
-
-//     //Checks if character is an operator
-//         else if(isOperator(inStr[i])){
-//             temp1 = element.back();
-//             element.removeBack();
-//             temp2 = element.back();
-//             element.removeBack();
-//             element.insertBack(inStr[i]);
-//             element.insertBack(temp1);
-//             element.insertBack(temp2);
-//             temp1 = 0;
-//             temp2 = 0;
-
-//         }
-//     //If character is a space
-//         else
-//             continue;
-        
-//     }
- 
-// //While the deque is not empty we want to add each character in the deque to a string
-//     while(!element.empty()){
-//         returnString += element.front();
-//         element.removeFront();
-//     }
-
-// //Calls a function to insert spaces into the string between each character  
 
     return returnString;
 
