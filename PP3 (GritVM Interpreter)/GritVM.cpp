@@ -1,7 +1,5 @@
 #ifndef GRITVM_CPP
 #define GRITVM_CPP
-#include<iostream>
-#include <fstream>
 
 #include "GritVM.hpp"
 
@@ -11,7 +9,7 @@ GritVM::GritVM(){
     accumulator = 0; //Accumulator should start at 0
 }
 
-//Resets to a waiting state
+//Sets the accumulator to 0, clears the dataMem and instructMem, sets the machineStatus to WAITING
 STATUS GritVM::reset()
 {
     machineStatus = WAITING; 
@@ -78,7 +76,7 @@ STATUS GritVM::load(const std::string filename, const std::vector<long> &initial
     return machineStatus;
 }
 
-
+//This method starts the evaluation of the instructions and returns the machine status
 STATUS GritVM::run(){
     switch(machineStatus){
          case WAITING:  
