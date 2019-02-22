@@ -15,7 +15,6 @@ using namespace std;
 class GritVM : public GritVMInterface{
        
       public:
-
             GritVM ();
             STATUS load(const std::string filename, const std::vector<long> &initialMemory);
             STATUS run();
@@ -23,7 +22,6 @@ class GritVM : public GritVMInterface{
             STATUS reset();
 
       private:
-
             std::vector<long> dataMem;
             std::list<Instruction> instructMem;
             std::list<Instruction>::iterator currentInstruct;

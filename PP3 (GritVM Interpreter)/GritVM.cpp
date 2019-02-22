@@ -8,9 +8,10 @@
 //Constructor
 GritVM::GritVM(){
     machineStatus = WAITING;    //The status should start off waiting
-    accumulator = 0;
+    accumulator = 0; //Accumulator should start at 0
 }
 
+//Resets to a waiting state
 STATUS GritVM::reset()
 {
     machineStatus = WAITING; 
@@ -21,6 +22,7 @@ STATUS GritVM::reset()
     return machineStatus;
 }
 
+//Accessor, gets the data memember
 std::vector<long> GritVM::getDataMem(){
     return dataMem;
 }
@@ -35,18 +37,14 @@ STATUS GritVM::load(const std::string filename, const std::vector<long> &initial
     ifstream input;
     string line;
 
+//Opens the file
     input.open(filename);
     
-   // Ensures that the file is open
-    // if(!input.good()){
-    //     throw ("For some reason the file is not opening");
-    // }
+   //Ensures that the file is open
+    if(!input.good()){
+        throw ("For some reason the file is not opening");
+    }
 
-    if (!input.good())
-	{
-		throw("Can't open the file!"); //if file is not opening
-		
-	}
 
     else {
         machineStatus = READY;
@@ -79,6 +77,7 @@ STATUS GritVM::load(const std::string filename, const std::vector<long> &initial
     
     return machineStatus;
 }
+
 
 STATUS GritVM::run(){
     switch(machineStatus){
@@ -252,8 +251,7 @@ STATUS GritVM::run(){
         machineStatus = HALTED;
     }
 
-
-    }
+ }
 
     return machineStatus;
 }
