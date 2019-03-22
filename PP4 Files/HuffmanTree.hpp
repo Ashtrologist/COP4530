@@ -23,7 +23,8 @@ class HuffmanTree : public HuffmanTreeBase {
 
     private:
         HuffmanNode *node;
-        HuffmanNode *tempNode;
+        HuffmanNode *temp;
+
         string serialize = "";
         HeapQueue<HuffmanNode*, HuffmanNode::Compare> heap;
 

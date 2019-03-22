@@ -6,66 +6,22 @@ string HuffmanTree::serializeTree() const{
 
 //Recursive function to traverse through the binary trea
 void HuffmanTree::postOrder(HuffmanNode* root){
+
     if(root == NULL){
         postOrder(root -> left);
         postOrder(root -> right);
-    }
+    
 
         if(root -> isLeaf()){
             serialize.push_back('L');
             serialize.push_back(root -> getCharacter());
         }
 
-        else 
+        else{
             serialize.push_back('B');
-
-}
-
-string HuffmanTree::compress(const string inputStr){
-    map<char, int> frequency;
-    map<char, string> charMap;
-    string output = "";
-    int count = 0;
-    
-   
-   // Review this for loop to ensure its properly getting the characters
-    for(int i = 0; i < inputStr.length(); i ++){
-        frequency[inputStr[i]]++;
-    }
-
-    //at might need to be tempNode
-    for(auto tempNode : frequency){
-        heap.insert(new HuffmanNode(tempNode.first, tempNode.second));
-    }
-
-    while(heap.size() > 1){
-        HuffmanNode* left = heap.min();
-        heap.removeMin();
-
-        HuffmanNode* right = heap.min();
-        heap.removeMin();
-
-        count = left -> getFrequency() + right -> getFrequency();
-        heap.insert(new HuffmanNode('\0', count, tempNode, left, right));
-
-    }
-
-        HuffmanNode* root = heap.min();
-        postOrder(root);
-        compute(root, "", charMap);
-
-        for(int i = 0; i < inputStr.length(); i++){
-            output += charMap[inputStr[i]];
-
         }
-
-        // for(char getChar : inputStr){
-        //     output += charMap[getChar];
-        // }
-
-        return output;
+    }
 }
-
 
 //function is responsible checking if it is a leaf or branch and L+char or B 
 void HuffmanTree::compute(HuffmanNode* root, string inputStr, map<char, string> &strMap){
@@ -88,6 +44,52 @@ void HuffmanTree::compute(HuffmanNode* root, string inputStr, map<char, string> 
         serialize.push_back('B');
     }
 }
+
+string HuffmanTree::compress(const string inputStr){
+    map<char, int> frequency;
+    map<char, string> charMap;
+    string output = "";
+    int count = 0;
+    
+   
+   // Review this for loop to ensure its properly getting the characters
+    for(int i = 0; i < inputStr.length(); i ++){
+        frequency[inputStr[i]]++;
+    }
+
+    //at might need to be tempNode
+    for(auto temp : frequency){
+        heap.insert(new HuffmanNode(temp.first, temp.second));
+    }
+
+    while(heap.size() > 1){
+        HuffmanNode* left = heap.min();
+        heap.removeMin();
+
+        HuffmanNode* right = heap.min();
+        heap.removeMin();
+
+        count = left -> getFrequency() + right -> getFrequency();
+        heap.insert(new HuffmanNode('\0', count, temp, left, right));
+
+    }
+
+        HuffmanNode* root = heap.min();
+        postOrder(root);
+        compute(root, "", charMap);
+
+        for(int i = 0; i < inputStr.length(); i++){
+            output += charMap[inputStr[i]];
+
+        }
+
+        // for(char getChar : inputStr){
+        //     output += charMap[getChar];
+        // }
+
+        return output;
+}
+
 
 string HuffmanTree::decompress (const string inputCode, const string serializedTree){
 
