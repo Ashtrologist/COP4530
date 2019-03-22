@@ -73,7 +73,7 @@ void HuffmanTree::compute(HuffmanNode* root, string inputStr, map<char, string> 
     }
 }
 
-
+//Function used to decompress the string
 string HuffmanTree::decompress (const string inputCode, const string serializedTree){
 
     bool test = false;
