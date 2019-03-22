@@ -22,9 +22,8 @@ class HuffmanTree : public HuffmanTreeBase {
          void compute(HuffmanNode* root, string inputStr, map<char, string> &strMap);
 
     private:
-        HuffmanNode *node;
-        HuffmanNode *temp;
-
+        
+        HuffmanNode *tempNode;
         string serialize = "";
         HeapQueue<HuffmanNode*, HuffmanNode::Compare> heap;
 
