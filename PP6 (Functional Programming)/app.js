@@ -70,32 +70,72 @@ const lowerCaseUniq = R.compose(
 /* ********************************************************************************************** */
 /* ****************************   Functions Required For Assignment   *************************** */
 /* ********************************************************************************************** */
-const imageCount = (flickr) => {
+
+//Function to count the number of images in the JSON
+const imageCount = (image) => {
   return R.compose(
     R.length(),
-    R.prop('items'))
-    (flickr)
+    R.prop('items'))(image)
 }
 
-const alphaNumericTagsUniq = (flickr) => {
+//Returns an array of unique alphanumeric tags
+const alphaNumericTagsUniq = (image) => {
   return R.compose(
-    R.sort(R.comparator((x,y) => x < y)),
+    R.sort(R.comparator((a, b) => a < b)),
     R.uniq(),
     R.map(R.toLower()),
     R.filter(R.test(/^[A-Za-z0-9]*$/)),
     R.flatten(),
     R.map(R.split(/\s/)),
     R.pluck('tags'),
-    R.prop('items'))(flickr)
+    R.prop('items'))(image);
 }
 
-const nonAlphaNumericTags = () => [undefined]
+//Returns all non alphanumeric tags
+const nonAlphaNumericTags = (image) => {
+  return R.compose(
+        R.filter(R.test(/[^\u0000-\u00ff]/)),
+        R.flatten(),
+        R.map(R.split(/\s/)),
+        R.pluck('tags'),
+        R.prop('items'))(image);
+}
 
-const avgTitleLength = () => undefined
+//Returns a float with average title length
+const avgTitleLength = (image) => {
+  return Math.round(
+        R.compose(
+        R.mean(),
+        R.map(R.length()),
+        R.pluck('title'),
+        R.prop('items'))(image))
+  }
 
-const commonTagByRank = rank => () => undefined
+  //Tag by rank function
+const commonTagByRank = rank => (image) => {
+    return  R.compose(
+            R.prop('key'),
+            R.view(R.lensIndex(rank)),
+            R.reverse(),
+            R.sortBy(i => i.freq),
+            R.map(i => { return {key: i[0], freq: R.length(i[1])}}),
+            R.toPairs(),
+            R.groupBy(i => i),
+            R.flatten(),
+            R.map(R.split(/\s/)),
+            R.pluck('tags'),
+            R.prop('items'))(image)
+}
 
-const oldestPhotoTitle = () => undefined
+//Returns title of the oldest photo taken
+const oldestPhotoTitle = (image) => {
+    return R.compose(
+           R.prop('title'),
+           R.view(R.lensIndex(0)),
+           R.sortBy(R.prop('date_taken')),
+           R.map(i => {return {title: i.title, date_taken: new Date(i.date_taken)}}),
+           R.prop('items'))(image)
+}
 
 /* ********************************************************************************************** */
 /* ********************************************************************************************** */
