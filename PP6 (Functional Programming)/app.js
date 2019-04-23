@@ -70,9 +70,24 @@ const lowerCaseUniq = R.compose(
 /* ********************************************************************************************** */
 /* ****************************   Functions Required For Assignment   *************************** */
 /* ********************************************************************************************** */
-const imageCount = () => undefined
+const imageCount = (flickr) => {
+  return R.compose(
+    R.length(),
+    R.prop('items'))
+    (flickr)
+}
 
-const alphaNumericTagsUniq = () => [undefined]
+const alphaNumericTagsUniq = (flickr) => {
+  return R.compose(
+    R.sort(R.comparator((x,y) => x < y)),
+    R.uniq(),
+    R.map(R.toLower()),
+    R.filter(R.test(/^[A-Za-z0-9]*$/)),
+    R.flatten(),
+    R.map(R.split(/\s/)),
+    R.pluck('tags'),
+    R.prop('items'))(flickr)
+}
 
 const nonAlphaNumericTags = () => [undefined]
 
