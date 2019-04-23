@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <string>
+#include <list>
+#include <tuple>
 #include <map>
 #include <queue>
 #include <math.h>
@@ -12,29 +14,24 @@
 
 using namespace std;
 
-
 class Edge{
 
-   // friend class Vertex;
-    //friend class Graph;
     public:
+         Edge(); //Constructor
+        ~Edge(); //Deconstructor
+
         string distance1;
         string distance2;
-        int weight;
-
-    
-        Edge();
-        ~Edge();
+        unsigned long lineWeight;
 
 };
 
 class Graph : public GraphBase {
     friend class Edge;
-  //  friend class Vertex;
 
     public:
-    // Graph();
-    // ~Graph();
+
+     void decidePath(map<string, string> startLabel, string endLabel, vector<string> &path);
      void addVertex(std::string label);
      void removeVertex(std::string label);
      void addEdge(std::string label1, std::string label2, unsigned long weight);
@@ -44,6 +41,7 @@ class Graph : public GraphBase {
     // private:
          vector<string> vertex;
         vector<Edge*> vertexEdge;
+        vector<string> pathway;
     
 };
 
@@ -56,8 +54,6 @@ class Graph : public GraphBase {
 //         vector<string> vertex;
 //         vector<Edge*> vertexEdge;
 // };
-
-
 
 
 #endif
